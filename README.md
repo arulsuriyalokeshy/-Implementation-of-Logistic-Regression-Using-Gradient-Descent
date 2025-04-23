@@ -65,6 +65,55 @@ y
 ```
 ![image](https://github.com/user-attachments/assets/2e19f9e6-327f-41a0-a418-9f358766da4c)
 
+```
+theta=np.random.randn(x.shape[1])
+Y=y
+def sigmoid(z):
+    return 1/(1+np.exp(-z))
+
+def loss(theta,x,Y):
+      h=sigmoid(x.dot(theta))
+      return -np.sum(y*np.log(h)+(1-y)*np.log(1-h))
+def gradient_descent(theta,x,Y,alpha,num_iterations):
+    m=len(y)
+    for i in range(num_iterations):
+        h=sigmoid(x.dot(theta))
+        gradient=x.T.dot(h-y)/m
+        theta-=alpha * gradient
+    return theta
+
+theta=gradient_descent(theta,x,Y,alpha=0.01,num_iterations=1000)
+
+def predict(theta,x):
+    h=sigmoid(x.dot(theta))
+    y_pred=np.where(h>=0.5,1,0)
+    return y_pred
+y_pred=predict(theta,x)
+
+accuracy=np.mean(y_pred.flatten()==Y)
+print("Accuracy:",accuracy)
+```
+![image](https://github.com/user-attachments/assets/f8c5f201-99db-4755-ab66-b0ef72fb25cb)
+
+```
+print(y_pred)
+print(y)
+```
+![image](https://github.com/user-attachments/assets/2c293d75-eed7-4493-9786-4bc15ac0e3ce)
+
+```
+xnew=np.array([[0,87,0,95,0,2,78,2,0,0,1,0]])
+y_prednew=predict(theta,xnew)
+print(y_prednew)
+```
+![image](https://github.com/user-attachments/assets/575efd3b-6e9a-4ee6-a370-f4bf9af2792f)
+
+```
+xnew=np.array([[0,0,0,0,0,2,8,2,0,0,1,0]])
+y_prednew=predict(theta,xnew)
+print(y_prednew)
+```
+![image](https://github.com/user-attachments/assets/c0a2405f-ac40-408a-81e3-538195015298)
 
 ## Result:
 Thus the program to implement the the Logistic Regression Using Gradient Descent is written and verified using python programming.
